@@ -20,7 +20,7 @@ ServerControl::Module->skip_restart;
 
 # register hooks
 __PACKAGE__->register('before_start', sub { shift->before_start(@_); });
-__PACKAGE__->register('after_stop',   sub { shift->after_stop(@_); });
+__PACKAGE__->register('before_stop',   sub { shift->before_stop(@_); });
 
 
 sub before_start {
@@ -33,7 +33,7 @@ sub before_start {
    spawn("$path/$tanuki_wrapper start");
 }
 
-sub after_stop {
+sub before_stop {
    my ($class, $sc) = @_;
 
    my $args = ServerControl::Args->get;
